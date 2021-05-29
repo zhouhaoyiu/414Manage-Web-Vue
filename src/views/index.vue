@@ -1,7 +1,10 @@
 <template>
- <div>
-   <TopBar></TopBar>
- </div>
+  <div class="page-content">
+    <TopBar></TopBar>
+    <div class="pageMain">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,6 +41,12 @@ export default {
 
 </script>
 
-<style>
-
+<style lang='less'>
+.page-content{
+  background: #eee;
+  width:100%;
+  height:100%;
+}
+.pageMain{
+}
 </style>
