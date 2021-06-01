@@ -24,6 +24,9 @@ export default {
       this.$router.push({ name: 'login' })
     }
   },
+  mounted () {
+    this.handleMounted()
+  },
   methods: {
     handleSignout () {
       // 清除token
@@ -35,6 +38,9 @@ export default {
     },
     handleIndex () {
       this.$router.push({ name: 'index' })
+    },
+    async handleMounted () {
+
     }
   }
 }
@@ -42,11 +48,11 @@ export default {
 </script>
 
 <style lang='less'>
-.page-content{
+.page-content {
   background: #eee;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 }
-.pageMain{
+.pageMain {
 }
 </style>
