@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div class="page-content" :style="styles">
     <TopBar></TopBar>
     <div class="pageMain">
       <router-view></router-view>
@@ -9,10 +9,20 @@
 
 <script>
 import TopBar from '../components/TopBar'
+import picture from '@/assets/bk.jpg'
+
 export default {
   data: function () {
     return {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token'),
+      styles: {
+        backgroundImage: `url(${picture})`,
+        // background: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+
+        backgroundSize: '100% 100%'
+
+      }
     }
   },
   components: {
@@ -40,7 +50,7 @@ export default {
       this.$router.push({ name: 'index' })
     },
     async handleMounted () {
-
+      //
     }
   }
 }
@@ -49,10 +59,11 @@ export default {
 
 <style lang='less'>
 .page-content {
-  background: #eee;
+  // background: #eee;
   width: 100%;
   height: 100%;
 }
 .pageMain {
+  //
 }
 </style>

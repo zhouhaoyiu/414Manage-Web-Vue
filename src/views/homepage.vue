@@ -1,5 +1,7 @@
 <template>
-  <div>人员介绍</div>
+  <div>
+    <video src=""></video>
+  </div>
 </template>
 
 <script>

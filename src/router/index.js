@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import login from '../login.vue'
 import index from '../views/index.vue'
 import homePage from '../views/homepage.vue'
-import introduction from '../views/introduction.vue'
+import introduction from '../views/introduction/introduction.vue'
 import photo from '../views/photo.vue'
 import bill from '../views/bill.vue'
 
@@ -45,7 +45,7 @@ export default new Router({
         },
         {
           name: 'bill',
-          path: 'bill',
+          path: '/bill',
           component: bill
         }
       ]
