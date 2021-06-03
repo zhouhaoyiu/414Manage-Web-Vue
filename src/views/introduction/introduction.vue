@@ -11,7 +11,7 @@
     </div>
     <div class="main">
       <div class="Info">
-        <router-view></router-view>
+        <memberIntro :trueName.sync="memberName"></memberIntro>
       </div>
       <div class="sideBar">
         <div class="auther">
@@ -77,8 +77,13 @@
         </div>
         <div class="members">
           <div class="memberContent">
-            <div class="member" v-for="i in Member" v-bind:key="i.trueName">
-              {{ i.trueName }}
+            <div
+              class="member"
+              @click="memberName = i.trueName"
+              v-for="i in Member"
+              v-bind:key="i.trueName"
+            >
+              <span>{{ i.trueName }}</span>
             </div>
           </div>
         </div>
@@ -88,11 +93,14 @@
 </template>
 
 <script>
+
+import memberIntro from '../../components/memberIntro'
 export default {
   data () {
     return {
       autherEn: 'Mystic Zhou',
       autherCn: '周浩宇',
+      memberName: '',
       contactInfoList: [
         {
           icon: '',
@@ -130,6 +138,9 @@ export default {
       array = array.sort((a, b) => a.trueName.localeCompare(b.trueName, 'zh'))
       return array
     }
+  },
+  components: {
+    memberIntro
   }
 }
 </script>
@@ -170,6 +181,17 @@ a:focus {
     width: 80%;
     margin: 0 auto;
     display: flex;
+    .Info {
+      width: 75%;
+      background: green;
+      height: 46rem;
+      background: url(../../assets/infoBk.png) no-repeat 100% 100%;
+      // background: transparent;
+      // background-position: bottom;
+      background-size: cover;
+      border-radius: 10px;
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    }
     .sideBar {
       margin-left: auto;
       width: 25%;
@@ -178,12 +200,14 @@ a:focus {
         height: 13rem;
         margin: auto;
         width: 93%;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
         // background: blue;
         // display: flex;
         // flex-direction: column;
         background: url(../../assets/sakura.jpg) no-repeat 100% 100%;
+        background-size: cover;
         background-position: bottom;
-
+        border-radius: 10px;
         .autherImg {
           width: 100%;
           height: 7rem;
@@ -215,21 +239,26 @@ a:focus {
       }
       .members {
         position: relative;
-        height: 39rem;
+        height: 30rem;
         width: 93%;
         margin: 3rem auto;
-        background: blue;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+        border-radius: 10px; // background: blue;
+        background: url(../../assets/memberBk.png) no-repeat 100% 100%;
+
+        // background-position: bottom;
+        background-size: cover;
         .memberContent {
           position: absolute;
           width: 50%;
           // height: 10rem;
           top: 30%;
-          background: green;
+          // background: green;
           left: 25%;
           .member {
             box-sizing: border-box;
             padding-bottom: 1rem;
-            background: gold;
+            // background: gold;
             width: max-content;
             margin: auto;
           }

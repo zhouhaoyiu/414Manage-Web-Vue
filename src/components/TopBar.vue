@@ -131,12 +131,12 @@ export default {
       text-align: center;
     }
     .btnItems:hover .btnText {
-      color: rgb(0, 225, 255);
+      color: rgb(0, 174, 255);
     }
     .show {
       button {
-        color: rgb(0, 225, 255);
-        border-bottom: 0.15rem solid rgb(0, 225, 255);
+        color: rgb(0, 174, 255);
+        border-bottom: 0.15rem solid rgb(0, 174, 255);
       }
     }
     .btnText {
