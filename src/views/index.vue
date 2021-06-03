@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content" :style="styles">
+  <div class="page-content">
     <TopBar></TopBar>
     <div class="pageMain">
       <router-view></router-view>
@@ -20,8 +20,8 @@ export default {
         // background: 'no-repeat'
         backgroundRepeat: 'no-repeat',
 
-        backgroundSize: '100% 100%'
-
+        backgroundSize: '100% 100%',
+        backgroundAttachment: 'fixed'
       }
     }
   },

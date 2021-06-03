@@ -5,7 +5,7 @@ import index from '../views/index.vue'
 import homePage from '../views/homepage.vue'
 import introduction from '../views/introduction/introduction.vue'
 import photo from '../views/photo.vue'
-import bill from '../views/bill.vue'
+import bills from '../views/bills.vue'
 
 const originalPush = Router.prototype.push
 
@@ -44,9 +44,9 @@ export default new Router({
           component: photo
         },
         {
-          name: 'bill',
-          path: '/bill',
-          component: bill
+          name: 'bills',
+          path: '/bills',
+          component: bills
         }
       ]
     }

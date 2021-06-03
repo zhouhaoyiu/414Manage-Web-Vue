@@ -24,12 +24,63 @@
             />
           </div>
           <div class="information">
-            <span class="informationTxt">{{ autherEn }}|{{ autherCn }}</span>
-            <span v-for="i in contactInfoList" v-bind:key="i.name" class="informationContact">
-            <img :src="i.icon" alt="">
-            <div>{{i.name}}</div>
+            <span class="informationTxt">{{ autherCn }} | {{ autherEn }}</span>
+            <!-- <span
+              v-for="i in contactInfoList"
+              v-bind:key="i.name"
+              class="informationContact"
+            > -->
+            <!-- <img :src="i.icon" alt="">
+            <div>{{i.name}}</div> -->
+            <!-- </span> -->
+          </div>
+          <div class="informationContect" style="text-align: center">
+            <img
+              src="../../assets/github.png"
+              alt=""
+              width="15px"
+              height="15px"
+            />
+            <a
+              href="https://github.com/zhouhaoyiu"
+              title="GitHub → https://github.com/zhouhaoyiu"
+              rel="noopener"
+              target="_blank"
+            >
+              Github
+            </a>
+            <span class="contectQQ">
+              <img
+                src="../../assets/QQ.png"
+                alt=""
+                width="17px"
+                height="17px"
+              />
+              <a
+                href="https://github.com/zhouhaoyiu"
+                title="648921469"
+                rel="noopener"
+                target="_blank"
+              >
+                QQ
+              </a>
+              <div class="code">
+                <img
+                  src="../../assets/QQcode.png"
+                  alt=""
+                  width="200rem"
+                  height="260rem"
+                />
+              </div>
             </span>
+          </div>
+        </div>
+        <div class="members">
+          <div class="memberContent">
+            <div class="member" v-for="i in Member" v-bind:key="i.trueName">
+              {{ i.trueName }}
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,13 +101,48 @@ export default {
         {
 
         }
+      ],
+      members: [
+        {
+          trueName: '周浩宇'
+        },
+        {
+          trueName: '任天易'
+        },
+        {
+          trueName: '杨贵晶'
+        },
+        {
+          trueName: '喻德能'
+        },
+        {
+          trueName: '姚毓炜'
+        },
+        {
+          trueName: '王子杰'
+        }
       ]
+    }
+  },
+  computed: {
+    Member () {
+      let array = this.members
+      array = array.sort((a, b) => a.trueName.localeCompare(b.trueName, 'zh'))
+      return array
     }
   }
 }
 </script>
 
 <style lang='less'>
+a:hover,
+a:link,
+a:visited,
+a:active,
+a:focus {
+  color: #333;
+  text-decoration: none;
+}
 .page {
   .divide {
     height: 4rem;
@@ -87,33 +173,65 @@ export default {
     .sideBar {
       margin-left: auto;
       width: 25%;
-      background: white;
+      // background: white;
       .auther {
-        height: 10rem;
+        height: 13rem;
         margin: auto;
         width: 93%;
         // background: blue;
         // display: flex;
         // flex-direction: column;
-        .autherImg{
+        background: url(../../assets/sakura.jpg) no-repeat 100% 100%;
+        background-position: bottom;
+
+        .autherImg {
           width: 100%;
-          height: 5rem;
+          height: 7rem;
           // background: goldenrod;
           display: flex;
           img {
-            box-sizing:border-box ;
+            box-sizing: border-box;
             border-radius: 100%;
-            margin: 0.2rem auto;
+            margin: 2rem auto;
           }
         }
-        .information{
+        .information {
           width: 100%;
           height: 2rem;
-          background: saddlebrown;
           display: flex;
-          .informationTxt{
+          .informationTxt {
             margin: auto;
             color: #777777;
+          }
+        }
+        .informationContect {
+          .contectQQ:hover .code {
+            display: block;
+          }
+          .code {
+            display: none;
+          }
+        }
+      }
+      .members {
+        position: relative;
+        height: 39rem;
+        width: 93%;
+        margin: 3rem auto;
+        background: blue;
+        .memberContent {
+          position: absolute;
+          width: 50%;
+          // height: 10rem;
+          top: 30%;
+          background: green;
+          left: 25%;
+          .member {
+            box-sizing: border-box;
+            padding-bottom: 1rem;
+            background: gold;
+            width: max-content;
+            margin: auto;
           }
         }
       }

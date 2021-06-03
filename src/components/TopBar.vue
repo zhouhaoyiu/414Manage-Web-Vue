@@ -38,7 +38,7 @@ export default {
 
       pageList: [
         {
-          name: `成员介绍${this.$store.state.role}`,
+          name: `成员介绍`,
           path: '/introduction',
           needRole: 0
         },
@@ -49,7 +49,7 @@ export default {
         },
         {
           name: '账单',
-          path: '/bill',
+          path: '/bills',
           needRole: 1
         }
 
@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     goIndex () {
+      this.selectBtn = -1
       this.$router.push('/index')
     },
     goPage (path) {
