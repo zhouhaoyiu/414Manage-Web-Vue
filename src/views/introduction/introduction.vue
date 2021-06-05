@@ -79,9 +79,10 @@
           <div class="memberContent">
             <div
               class="member"
-              @click="memberName = i.trueName"
-              v-for="i in Member"
+              @click="memberName = i.trueName;selectBtn = index"
+              v-for="(i, index) in Member"
               v-bind:key="i.trueName"
+              :class="{ select: selectBtn == index }"
             >
               <span>{{ i.trueName }}</span>
             </div>
@@ -98,9 +99,10 @@ import memberIntro from '../../components/memberIntro'
 export default {
   data () {
     return {
+      selectBtn: 5,
       autherEn: 'Mystic Zhou',
       autherCn: '周浩宇',
-      memberName: '',
+      memberName: '周浩宇',
       contactInfoList: [
         {
           icon: '',
@@ -164,9 +166,9 @@ a:focus {
 
     .divideText {
       opacity: 0;
-      transition: all 5s;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
+      transition: all 5s;
       -webkit-transition: all 5s; /* Safari */
     }
   }
@@ -252,15 +254,27 @@ a:focus {
           position: absolute;
           width: 50%;
           // height: 10rem;
-          top: 30%;
+          top: 23%;
           // background: green;
           left: 25%;
           .member {
             box-sizing: border-box;
-            padding-bottom: 1rem;
+            margin: auto;
+            margin-bottom: 1rem;
+            padding: 0.1rem 0.3rem;
+            color: #777777;
             // background: gold;
             width: max-content;
-            margin: auto;
+             transition: all 1s;
+      -webkit-transition: all 1s; /* Safari */
+          }
+          .member:hover{
+            color: #f875f8;
+          }
+          .select{
+            color: #f875f8;
+            border: 1px solid #fdb0fd;
+            border-radius: 50px;
           }
         }
       }

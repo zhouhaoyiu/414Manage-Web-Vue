@@ -5,10 +5,18 @@
     </div>
     <div v-for="i in Info" v-bind:key="i.myName" class="introduceContent">
       <div class="introduce">
-        <div>姓名：{{ i.myName }}</div>
-        <div>昵称：{{ i.nickName }}</div>
-        <div>生日：{{ i.birth }}</div>
-        <div>住址：{{ i.address }}</div>
+        <div>
+          <span>姓名：{{ i.myName }}</span>
+        </div>
+        <div>
+          <span>昵称：{{ i.nickName }}</span>
+        </div>
+        <div>
+          <span>生日：{{ i.birth }}</span>
+        </div>
+        <div>
+          <span>住址：{{ i.address }}</span>
+        </div>
       </div>
     </div>
     <div class="information"></div>
@@ -45,8 +53,8 @@ export default {
 
 <style lang="less">
 canvas {
-  background: rgb(226, 225, 225);
-  opacity: 0.3;
+  background: transparent;
+  opacity: 0;
 }
 .zhy {
   width: 100%;
@@ -55,7 +63,7 @@ canvas {
   .photoContent {
     position: relative;
     width: 40%;
-    background: purple;
+    // background: purple;
     height: 25rem;
     .photo {
       position: absolute;
@@ -69,12 +77,24 @@ canvas {
     position: relative;
     width: 60%;
     height: 25rem;
-    background: green;
+    // background: green;
+    .introduce {
+      position: absolute;
+      // background: purple;
+      top: 20%;
+      left: 20%;
+      font-size: 1.5rem;
+    }
+    .introduce div {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      margin-bottom: 2rem;
+    }
   }
   .information {
     width: 100%;
     height: 21rem;
-    background: gold;
+    // background: gold;
   }
 }
 </style>

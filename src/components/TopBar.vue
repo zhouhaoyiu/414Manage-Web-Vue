@@ -17,6 +17,7 @@
       </div>
     </div>
     <div class="loginOut">
+      <span>{{token}}</span>
       <button @click.prevent="handleSignout()" class="loginOutBtn">
         退出登录
       </button>
@@ -131,12 +132,12 @@ export default {
       text-align: center;
     }
     .btnItems:hover .btnText {
-      color: rgb(0, 174, 255);
+      color: rgb(49, 112, 250);
     }
     .show {
       button {
-        color: rgb(0, 174, 255);
-        border-bottom: 0.15rem solid rgb(0, 174, 255);
+        color: rgb(49, 112, 250);
+        border-bottom: 0.15rem solid rgb(49, 112, 250);
       }
     }
     .btnText {
