@@ -17,6 +17,7 @@
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input
+          show-password
           v-model="formdata.password"
           placeholder="请输入密码"
         ></el-input>
@@ -63,7 +64,7 @@ export default {
     async handleLogin () {
       let response = await this.$axios({
         method: 'get',
-        url: 'http://172.24.83.81:8091/user/login',
+        url: 'http://localhost:8091/user/login',
         params: {
           userName: this.formdata.username,
           passWord: this.formdata.password
@@ -73,11 +74,10 @@ export default {
       if (response.data.code === '1000') {
         console.log('yes')
         localStorage.setItem('token', this.formdata.username)
-        localStorage.setItem('role', response.data.role)
-        localStorage.setItem('trueName', response.data.trueName)
-
         this.$store.state.role = response.data.role
         this.$store.state.trueName = response.data.trueName
+        this.$store.state.userName = response.data.userName
+        this.$store.state.id = response.data.id
         console.log(this.$store.state.role)
         console.log(this.$store.state.trueName)
         // this.$message.success(response.data.message)
