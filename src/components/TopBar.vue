@@ -8,7 +8,7 @@
     <div class="btnContent">
       <div
         class="btnItems"
-        v-for="(i, index) in pageList"
+        v-for="(i, index) in truePageList"
         :class="{ show: selectBtn == index }"
         @click="selectBtn = index"
         v-bind:key="i.name"
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="loginOut">
-      <span>{{token}}</span>
+      <span>欢迎您，{{$store.state.trueName}}{{roleName}}</span>
       <button @click.prevent="handleSignout()" class="loginOutBtn">
         退出登录
       </button>
@@ -30,8 +30,23 @@ export default {
   name: 'TopBar',
   props: {
   },
+  watch: {
+    role: {
+      handler: function () {
+        if (this.role === 2) {
+          this.roleName = `管理员`
+        } else {
+          this.roleName = `访客`
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   data () {
     return {
+      role: this.$store.state.role,
+      roleName: '',
       selectBtn: null,
       count: 0,
       token: localStorage.getItem('token'),
@@ -41,18 +56,23 @@ export default {
         {
           name: `成员介绍`,
           path: '/introduction',
-          needRole: 0
+          needRole: 1
         },
         {
           name: '照片墙',
           path: '/photo',
-          needRole: 0
+          needRole: 1
         },
         {
           name: '账单',
           path: '/bills',
-          needRole: 1
+          needRole: 2
         }
+        // {
+        //   name: '谷',
+        //   path: '/bills',
+        //   needRole: 2
+        // }
 
       ]
     }
@@ -89,6 +109,16 @@ export default {
     }
   },
   computed: {
+    truePageList () {
+      let list = []
+      let listOld = this.pageList || []
+      for (let i in listOld) {
+        if (listOld[i].needRole <= this.$store.state.role) {
+          list.push(listOld[i])
+        }
+      }
+      return list
+    }
     //
   },
   mounted () {
@@ -152,12 +182,13 @@ export default {
   }
   .loginOut {
     position: absolute;
-    left: 90%;
-    width: 10rem;
+    left: 82%;
+    width: 20rem;
     // background-color: black;
     .loginOutBtn {
       background: #f56c6c;
       color: white;
+      margin-left: 2rem;
       padding: 0.2rem 0.8rem;
       font-size: 1rem;
       border: 0.1rem solid #f56c6c;

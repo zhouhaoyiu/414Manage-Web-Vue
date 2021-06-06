@@ -2,7 +2,7 @@
 <template>
   <div class="login-wrap">
     <el-form
-      :rules='rules'
+      :rules="rules"
       class="login-form"
       label-position="top"
       label-width="80px"
@@ -10,13 +10,26 @@
     >
       <h2 style="">欢迎来到北六414</h2>
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="formdata.username" placeholder="请输入用户名"></el-input>
+        <el-input
+          v-model="formdata.username"
+          placeholder="请输入用户名"
+        ></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="formdata.password" placeholder="请输入密码"></el-input>
+        <el-input
+          v-model="formdata.password"
+          placeholder="请输入密码"
+        ></el-input>
       </el-form-item>
-      <el-button :disabled="disabled" @click.prevent="handleLogin()" class="login-btn" type="primary"
+      <el-button
+        :disabled="disabled"
+        @click.prevent="handleLogin()"
+        class="login-btn"
+        type="primary"
         >登录</el-button
+      >
+      <el-button @click.prevent="handleRegis()" class="login-btn" type="primary"
+        >注册</el-button
       >
       <!-- <el-button v-if="!disable" @click.prevent="handleLogin()" class="login-btn" type="primary"
         >登录</el-button
@@ -40,26 +53,38 @@ export default {
       },
       checked: true,
       rules: {
-        username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
     }
   },
   methods: {
     // 登录请求
-    handleLogin () {
-      // this.$http.post('login', this.formdata)
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
-      if (this.formdata.username === 'zhy') {
+    async handleLogin () {
+      let response = await this.$axios({
+        method: 'get',
+        url: 'http://172.24.83.81:8091/user/login',
+        params: {
+          userName: this.formdata.username,
+          passWord: this.formdata.password
+        }
+      })
+      console.log(response)
+      if (response.data.code === '1000') {
         console.log('yes')
         localStorage.setItem('token', this.formdata.username)
-        this.$message.success('登陆成功')
+        localStorage.setItem('role', response.data.role)
+        localStorage.setItem('trueName', response.data.trueName)
+
+        this.$store.state.role = response.data.role
+        this.$store.state.trueName = response.data.trueName
+        console.log(this.$store.state.role)
+        console.log(this.$store.state.trueName)
+        // this.$message.success(response.data.message)
         this.$router.push({ name: 'index' })
       } else {
         this.$message({
-          message: '登录失败',
+          message: response.data.message,
           type: 'error',
           duration: 1000
         })
@@ -112,7 +137,7 @@ export default {
 .login-wrap {
   height: 100%;
   background-color: #324152;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }

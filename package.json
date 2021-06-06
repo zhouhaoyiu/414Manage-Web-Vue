@@ -14,10 +14,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "element-ui": "^2.15.2",
+    "video.js": "^7.12.3",
+    "videojs-contrib-hls": "^5.15.0",
+    "videojs-flash": "^2.2.1",
     "vue": "^2.5.2",
+    "vue-axios": "^3.2.4",
     "vue-router": "^3.0.1",
-    "vuex": "^3.6.2"
+    "vue-video-player": "^5.0.2",
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

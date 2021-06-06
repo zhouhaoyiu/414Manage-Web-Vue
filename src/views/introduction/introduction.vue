@@ -79,7 +79,10 @@
           <div class="memberContent">
             <div
               class="member"
-              @click="memberName = i.trueName;selectBtn = index"
+              @click="
+                memberName = i.trueName;
+                selectBtn = index;
+              "
               v-for="(i, index) in Member"
               v-bind:key="i.trueName"
               :class="{ select: selectBtn == index }"
@@ -102,7 +105,7 @@ export default {
       selectBtn: 5,
       autherEn: 'Mystic Zhou',
       autherCn: '周浩宇',
-      memberName: '周浩宇',
+      memberName: this.$store.state.trueName,
       contactInfoList: [
         {
           icon: '',
@@ -132,6 +135,19 @@ export default {
           trueName: '王子杰'
         }
       ]
+    }
+  },
+  watch: {
+    memberName: {
+      handler: function () {
+        for (let i in this.Member) {
+          if (this.Member[i].trueName === this.$store.state.trueName) {
+            this.selectBtn = i
+          }
+        }
+      },
+      immediate: true,
+      deep: true
     }
   },
   computed: {
@@ -265,13 +281,13 @@ a:focus {
             color: #777777;
             // background: gold;
             width: max-content;
-             transition: all 1s;
-      -webkit-transition: all 1s; /* Safari */
+            transition: all 1s;
+            -webkit-transition: all 1s; /* Safari */
           }
-          .member:hover{
+          .member:hover {
             color: #f875f8;
           }
-          .select{
+          .select {
             color: #f875f8;
             border: 1px solid #fdb0fd;
             border-radius: 50px;
