@@ -11,14 +11,14 @@
       <h2 style="">欢迎来到北六414</h2>
       <el-form-item label="用户名" prop="username">
         <el-input
-          v-model="formdata.username"
+          v-model.lazy="formdata.username"
           placeholder="请输入用户名"
         ></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input
           show-password
-          v-model="formdata.password"
+          v-model.lazy="formdata.password"
           placeholder="请输入密码"
         ></el-input>
       </el-form-item>
@@ -106,8 +106,7 @@ export default {
   },
   watch: {
     formdata: {
-      handler: function (val) {
-        console.log(val)
+      handler: function () {
         if (this.formdata.username === '' || this.formdata.password === '') {
           this.disabled = true
         } else {

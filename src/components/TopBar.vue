@@ -1,5 +1,5 @@
 <template>
-  <div class="Main">
+  <div class="Main" :class="{ color: color }">
     <div class="title">
       <div @click="goIndex()" class="txt">
         <span>{{ title }}</span>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="loginOut">
-      <span>欢迎您，{{$store.state.trueName}}{{roleName}}</span>
+      <span>欢迎您，{{ $store.state.trueName }}{{ roleName }}</span>
       <button @click.prevent="handleSignout()" class="loginOutBtn">
         退出登录
       </button>
@@ -29,6 +29,9 @@
 export default {
   name: 'TopBar',
   props: {
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
   },
   watch: {
     role: {
@@ -43,8 +46,9 @@ export default {
       immediate: true
     }
   },
-  data () {
+  data() {
     return {
+      color: false,
       role: this.$store.state.role,
       roleName: '',
       selectBtn: null,
@@ -66,7 +70,7 @@ export default {
         {
           name: '账单',
           path: '/bills',
-          needRole: 2
+          needRole: 1
         }
         // {
         //   name: '谷',
@@ -78,14 +82,26 @@ export default {
     }
   },
   methods: {
-    goIndex () {
+    handleScroll() {
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop
+      if (scrollTop) {
+        this.color = true
+      }
+      if (scrollTop <= 30) {
+        this.color = false
+      }
+    },
+    goIndex() {
       this.selectBtn = -1
       this.$router.push('/index')
     },
-    goPage (path) {
+    goPage(path) {
       this.$router.push(path)
     },
-    handleSignout () {
+    handleSignout() {
       // 清除token
       localStorage.clear()
       // 提示消息
@@ -93,7 +109,7 @@ export default {
       // 回到登陆页面
       this.$router.push({ name: 'login' })
     },
-    changeBtn (index) {
+    changeBtn(index) {
       this.selectBtn = index
     },
 
@@ -109,7 +125,7 @@ export default {
     }
   },
   computed: {
-    truePageList () {
+    truePageList() {
       let list = []
       let listOld = this.pageList || []
       for (let i in listOld) {
@@ -121,14 +137,22 @@ export default {
     }
     //
   },
-  mounted () {
-    //
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
+
 }
 </script>
 
 <style lang='less'>
+.color {
+  background-color: white !important;
+}
 .Main {
+  z-index: 9999;
+  transition: all 0.7s;
+  -webkit-transition: all 0.7s; /* Safari */
+  position: fixed;
   width: 100%;
   height: 4rem;
   background-color: transparent;
