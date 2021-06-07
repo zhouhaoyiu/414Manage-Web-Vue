@@ -149,7 +149,6 @@ export default {
   background-color: white !important;
 }
 .Main {
-  z-index: 9999;
   transition: all 0.7s;
   -webkit-transition: all 0.7s; /* Safari */
   position: fixed;

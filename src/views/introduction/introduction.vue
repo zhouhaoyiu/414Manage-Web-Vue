@@ -100,7 +100,7 @@
 
 import memberIntro from '../../components/memberIntro'
 export default {
-  data () {
+  data() {
     return {
       selectBtn: 5,
       autherEn: 'Mystic Zhou',
@@ -137,21 +137,15 @@ export default {
       ]
     }
   },
-  watch: {
-    memberName: {
-      handler: function () {
-        for (let i in this.Member) {
-          if (this.Member[i].trueName === this.$store.state.trueName) {
-            this.selectBtn = i
-          }
-        }
-      },
-      immediate: true,
-      deep: true
+  mounted() {
+    for (let i in this.Member) {
+      if (this.Member[i].trueName === this.$store.state.trueName) {
+        this.selectBtn = i
+      }
     }
   },
   computed: {
-    Member () {
+    Member() {
       let array = this.members
       array = array.sort((a, b) => a.trueName.localeCompare(b.trueName, 'zh'))
       return array

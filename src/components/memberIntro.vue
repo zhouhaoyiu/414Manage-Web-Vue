@@ -34,7 +34,7 @@ export default {
     Canvas
   },
   computed: {
-    Info () {
+    Info() {
       let info = []
       if (this.trueName === '周浩宇') {
         info.push({
