@@ -11,6 +11,8 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
+// const HOST = '172.24.83.31'
+
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
@@ -31,7 +33,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
-    compress: true,
+    // compress: true,
+    // host: HOST || config.dev.host,    
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
@@ -86,8 +89,8 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       resolve(devWebpackConfig)

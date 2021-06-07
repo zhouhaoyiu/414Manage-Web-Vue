@@ -245,6 +245,10 @@ a:focus {
             display: block;
           }
           .code {
+            img{
+              z-index: 99999;
+
+            }
             display: none;
           }
         }

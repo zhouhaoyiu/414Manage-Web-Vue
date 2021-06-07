@@ -1,7 +1,7 @@
 <template>
   <div class="page-content">
     <TopBar></TopBar>
-    <div style="width:100%;height:4rem"></div>
+    <div style="width: 100%; height: 4rem"></div>
     <div class="pageMain">
       <router-view></router-view>
     </div>
@@ -15,7 +15,7 @@ import picture from '@/assets/bk.jpg'
 export default {
   data: function () {
     return {
-      token: localStorage.getItem('token'),
+      token: sessionStorage.getItem('token'),
       styles: {
         backgroundImage: `url(${picture})`,
         // background: 'no-repeat'
@@ -29,28 +29,31 @@ export default {
   components: {
     TopBar
   },
-  beforeCreate () {
-    const token = localStorage.getItem('token')
+  beforeCreate() {
+    const token = sessionStorage.getItem('token')
     if (!token) {
       this.$router.push({ name: 'login' })
     }
   },
-  mounted () {
+  destroyed() {
+    sessionStorage.clear()
+  },
+  mounted() {
     this.handleMounted()
   },
   methods: {
-    handleSignout () {
+    handleSignout() {
       // 清除token
-      localStorage.clear()
+      sessionStorage.clear()
       // 提示消息
       this.$message.success('退出成功')
       // 回到登陆页面
       this.$router.push({ name: 'login' })
     },
-    handleIndex () {
+    handleIndex() {
       this.$router.push({ name: 'index' })
     },
-    async handleMounted () {
+    async handleMounted() {
       //
     }
   }

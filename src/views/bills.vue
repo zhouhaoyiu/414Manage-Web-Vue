@@ -173,7 +173,7 @@ export default {
     async handleMounted() {
       let response = await this.$axios({
         method: 'get',
-        url: 'http://localhost:8091/bill/getAllBills'
+        url: 'http://172.24.83.31:8091/bill/getAllBills'
       })
       this.bills = response.data.bill
       for (let i in this.bills) {
@@ -213,7 +213,7 @@ export default {
       let sentEventDate = this.formdata.eventDate.getFullYear() + '-' + (this.formdata.eventDate.getMonth() + 1) + '-' + (this.formdata.eventDate.getDate())
       let response = await this.$axios({
         method: 'get',
-        url: 'http://localhost:8091/bill/setBill',
+        url: 'http://172.24.83.31:8091/bill/setBill',
         params: {
           event: sentEvent,
           amount: sentAmount,
@@ -239,7 +239,7 @@ export default {
     async getBillByDate() {
       let response = await this.$axios({
         method: 'get',
-        url: 'http://localhost:8091/bill/getBillsByDate',
+        url: 'http://172.24.83.31:8091/bill/getBillsByDate',
         params: {
           eventDate: `${this.searchEventDate}%`
         }

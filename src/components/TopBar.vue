@@ -53,7 +53,7 @@ export default {
       roleName: '',
       selectBtn: null,
       count: 0,
-      token: localStorage.getItem('token'),
+      token: sessionStorage.getItem('token'),
       title: '北辰园六号楼414宿舍',
 
       pageList: [
@@ -70,6 +70,11 @@ export default {
         {
           name: '账单',
           path: '/bills',
+          needRole: 2
+        },
+        {
+          name: '聊天室',
+          path: '/chat',
           needRole: 1
         }
         // {
@@ -103,7 +108,7 @@ export default {
     },
     handleSignout() {
       // 清除token
-      localStorage.clear()
+      sessionStorage.clear()
       // 提示消息
       this.$message.success('退出成功')
       // 回到登陆页面
