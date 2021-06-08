@@ -1,5 +1,6 @@
 <template>
   <div class="bill">
+
     <div class="getBill">
       <div class="total">
         <div class="totalIn">
@@ -17,7 +18,8 @@
           >
         </div>
       </div>
-      <div class="bill" v-for="i in currentBills" v-bind:key="i.id">
+      <div v-show="page ==2" id="myChart"></div>
+      <div v-show="page==1" class="bill" v-for="i in currentBills" v-bind:key="i.id">
         <div>
           <span class="eventName">{{ i.event }}</span>
           <span class="billAmount">{{ i.amount }}</span>
@@ -35,6 +37,10 @@
         >
         </el-pagination>
       </div>
+        <el-radio-group v-model="page">
+          <el-radio-button label="1">详细信息</el-radio-button>
+          <el-radio-button label="2">统计图表</el-radio-button>
+        </el-radio-group>
       <div class="searchRadio">
         <el-radio-group v-model="searchDiabled">
           <el-radio-button label="true">查看所有</el-radio-button>
@@ -115,10 +121,14 @@
 </template>
 
 <script>
-// import func from 'vue-editor-bridge'
+const echarts = require('echarts')
 export default {
   data() {
     return {
+      trueData: [],
+      trueDate: [],
+      trueInfo: [],
+      page: 2,
       totalNumber: 0,
       totalIn: 0,
       totalOut: 0,
@@ -173,7 +183,7 @@ export default {
     async handleMounted() {
       let response = await this.$axios({
         method: 'get',
-        url: 'http://172.24.83.31:8091/bill/getAllBills'
+        url: 'http://localhost:8091/bill/getAllBills'
       })
       this.bills = response.data.bill
       for (let i in this.bills) {
@@ -197,6 +207,20 @@ export default {
           this.totalIn = this.totalIn + Number(response.data.bill[i].amount.slice(2, -1))
         }
       }
+
+      this.trueData = []
+      this.trueDate = []
+      this.trueInfo = []
+      for (let i in this.bills) {
+        this.trueDate.push(this.bills[i].eventDate)
+        this.trueInfo.push(this.bills[i].event)
+        if (this.bills[i].amountCode === 1) {
+          this.trueData.push(-Number(this.bills[i].amount.slice(2, -1)))
+        }
+        if (this.bills[i].amountCode === 2) {
+          this.trueData.push(Number(this.bills[i].amount.slice(2, -1)))
+        }
+      }
     },
     async submit() {
       let sentEvent = this.formdata.event
@@ -213,7 +237,7 @@ export default {
       let sentEventDate = this.formdata.eventDate.getFullYear() + '-' + (this.formdata.eventDate.getMonth() + 1) + '-' + (this.formdata.eventDate.getDate())
       let response = await this.$axios({
         method: 'get',
-        url: 'http://172.24.83.31:8091/bill/setBill',
+        url: 'http://localhost:8091/bill/setBill',
         params: {
           event: sentEvent,
           amount: sentAmount,
@@ -239,7 +263,7 @@ export default {
     async getBillByDate() {
       let response = await this.$axios({
         method: 'get',
-        url: 'http://172.24.83.31:8091/bill/getBillsByDate',
+        url: 'http://localhost:8091/bill/getBillsByDate',
         params: {
           eventDate: `${this.searchEventDate}%`
         }
@@ -266,6 +290,49 @@ export default {
           this.totalIn = this.totalIn + Number(response.data.bill[i].amount.slice(2, -1))
         }
       }
+      this.trueData = []
+      this.trueDate = []
+      this.trueInfo = []
+      for (let i in this.bills) {
+        this.trueDate.push(this.bills[i].eventDate)
+        this.trueInfo.push(this.bills[i].event)
+        if (this.bills[i].amountCode === 1) {
+          this.trueData.push(-Number(this.bills[i].amount.slice(2, -1)))
+        }
+        if (this.bills[i].amountCode === 2) {
+          this.trueData.push(Number(this.bills[i].amount.slice(2, -1)))
+        }
+      }
+    },
+    getDate() {
+      return this.trueDate
+    },
+    getData() {
+      return this.trueData
+    },
+    getTInfo() {
+      // console.log(this.trueInfo)
+      return this.trueInfo
+    },
+    async createEcharts() {
+      let myChart = echarts.init(document.getElementById('myChart'))
+      // 绘制图表
+      myChart.setOption({
+        tooltip: {},
+        xAxis: {
+          data: await this.getDate()
+        },
+        yAxis: {},
+        series: [{
+          name: await this.getTInfo(),
+          // name: '?????',
+          type: 'bar',
+          data: await this.getData(),
+          label: {
+            show: true
+          }
+        }]
+      })
     }
   },
   mounted() {
@@ -304,7 +371,7 @@ export default {
   },
   watch: {
     searchDiabled: {
-      handler: function (val) {
+      handler: async function (val) {
         if (val === 'true') {
           val = true
         }
@@ -312,14 +379,16 @@ export default {
           val = false
         }
         if (val === true || val === 'true') {
-          this.handleMounted()
+          await this.handleMounted()
+          this.createEcharts()
         }
         if (val === false || val === 'false') {
-          this.getBillByDate()
+          await this.getBillByDate()
+          this.createEcharts()
         }
       },
-      deep: true
-      // immediate: true
+      deep: true,
+      immediate: true
     },
 
     searchEventDate: {
@@ -370,6 +439,14 @@ export default {
     flex-direction: column;
     height: 50rem;
     margin-top: 2rem;
+    #myChart{
+      width: 800px;
+      height:300px;
+      canvas{
+        width: 100%;
+        height: 100%;
+      }
+    }
     .total {
       position: absolute;
       top: 3rem;

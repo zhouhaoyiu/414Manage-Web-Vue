@@ -64,7 +64,7 @@ export default {
     async handleLogin () {
       let response = await this.$axios({
         method: 'get',
-        url: 'http://172.24.83.31:8091/user/login',
+        url: 'http://localhost:8091/user/login',
         params: {
           userName: this.formdata.username,
           passWord: this.formdata.password

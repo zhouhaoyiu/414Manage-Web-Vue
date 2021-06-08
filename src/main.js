@@ -13,7 +13,6 @@ import ElementUI from 'element-ui'
 import global from './global.js'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../src/assets/css/reset.less'
-
 Vue.prototype.$video = Video
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
