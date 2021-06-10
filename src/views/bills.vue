@@ -392,9 +392,10 @@ export default {
     },
 
     searchEventDate: {
-      handler: function (val) {
+      handler: async function (val) {
         if (this.searchDiabled === false || this.searchDiabled === 'false') {
-          this.getBillByDate()
+          await this.getBillByDate()
+          this.createEcharts()
         }
       }
     },

@@ -9,8 +9,8 @@ import 'video.js/dist/video-js.css'
 
 import router from './router'
 import store from './vuex/store'
-import ElementUI from 'element-ui'
 import global from './global.js'
+import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../src/assets/css/reset.less'
 Vue.prototype.$video = Video
