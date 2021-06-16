@@ -132,7 +132,7 @@ export default {
       trueData: [],
       trueDate: [],
       trueInfo: [],
-      page: 2,
+      page: 1,
       totalNumber: 0,
       totalIn: 0,
       totalOut: 0,
@@ -341,6 +341,7 @@ export default {
   },
   mounted() {
     this.handleMounted()
+    this.createEcharts()
     let todey = new Date()
     this.searchEventDate = `${todey.getFullYear()}-0${todey.getMonth() + 1}`
   },
