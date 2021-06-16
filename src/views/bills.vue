@@ -1,6 +1,5 @@
 <template>
   <div class="bill">
-
     <div class="getBill">
       <div class="total">
         <div class="totalIn">
@@ -18,8 +17,13 @@
           >
         </div>
       </div>
-      <div v-show="page ==2" id="myChart"></div>
-      <div v-show="page==1" class="bill" v-for="i in currentBills" v-bind:key="i.id">
+      <div v-show="page == 2" id="myChart"></div>
+      <div
+        v-show="page == 1"
+        class="bill"
+        v-for="i in currentBills"
+        v-bind:key="i.id"
+      >
         <div>
           <span class="eventName">{{ i.event }}</span>
           <span class="billAmount">{{ i.amount }}</span>
@@ -37,10 +41,10 @@
         >
         </el-pagination>
       </div>
-        <el-radio-group v-model="page">
-          <el-radio-button label="1">详细信息</el-radio-button>
-          <el-radio-button label="2">统计图表</el-radio-button>
-        </el-radio-group>
+      <el-radio-group v-model="page">
+        <el-radio-button label="1">详细信息</el-radio-button>
+        <el-radio-button label="2">统计图表</el-radio-button>
+      </el-radio-group>
       <div class="searchRadio">
         <el-radio-group v-model="searchDiabled">
           <el-radio-button label="true">查看所有</el-radio-button>
@@ -440,10 +444,10 @@ export default {
     flex-direction: column;
     height: 50rem;
     margin-top: 2rem;
-    #myChart{
+    #myChart {
       width: 800px;
-      height:300px;
-      canvas{
+      height: 300px;
+      canvas {
         width: 100%;
         height: 100%;
       }
@@ -469,7 +473,8 @@ export default {
       position: absolute;
       top: 16rem;
       left: 5rem;
-      .el-input__prefix, .el-input__suffix{
+      .el-input__prefix,
+      .el-input__suffix {
         height: 3.7rem;
       }
     }

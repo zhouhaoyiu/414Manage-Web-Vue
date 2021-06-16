@@ -92,11 +92,10 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop
-      if (scrollTop) {
-        this.color = true
-      }
       if (scrollTop <= 30) {
         this.color = false
+      } else {
+        this.color = true
       }
     },
     goIndex() {
