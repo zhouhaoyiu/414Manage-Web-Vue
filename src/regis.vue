@@ -128,7 +128,7 @@ export default {
         }
       })
       console.log(res)
-      if (res === 'success') {
+      if (res.data.message === 'success') {
         let response = await this.$axios({
           method: 'get',
           url: 'http://localhost:8091/user/register',
