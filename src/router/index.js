@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '../login.vue'
-import regis from '../regis.vue'
-import index from '../views/index.vue'
-import homePage from '../views/homepage.vue'
-import introduction from '../views/introduction/introduction.vue'
-import photo from '../views/photo.vue'
-import chat from '../views/chat.vue'
-import bills from '../views/bills.vue'
+const photo = () => import('../views/photo.vue')
+const chat = () => import('../views/chat.vue')
+const bills = () => import('../views/bills.vue')
+const homePage = () => import('../views/homepage.vue')
+const introduction = () => import('../views/introduction/introduction.vue')
+const index = () => import('../views/index.vue')
+const regis = () => import('../regis.vue')
+const login = () => import('../login.vue')
 
 const originalPush = Router.prototype.push
 
