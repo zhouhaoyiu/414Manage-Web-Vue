@@ -56,9 +56,9 @@ export default {
       }
 
       ws.send(JSON.stringify({
-        id: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+        id: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)}-${new Date().getDate()}`,
         user: this.username,
-        dateTime: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+        dateTime: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)}-${new Date().getDate()}`,
         msg: this.msg
       }))
       this.msg = ''
@@ -73,10 +73,7 @@ export default {
       console.log('FE:WebSocket error', e)
     },
     handleWsMessage(e) {
-      // console.log(e);
-      // console.log('FE:WebSocket message',e.data);
       const msg = JSON.parse(e.data)
-      console.log(msg)
       this.msgList.push(msg)
     }
   }
