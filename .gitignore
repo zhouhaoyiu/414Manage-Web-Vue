@@ -16,3 +16,6 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+*.pdf
+static/NPSafeEditInstall.exe
+static/WhyNotWin11.exe
