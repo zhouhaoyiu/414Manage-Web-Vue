@@ -161,7 +161,7 @@ export default {
   height: 4rem;
   background-color: transparent;
   line-height: 3.9rem;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
   // display: flex;
   .title {
     position: absolute;
